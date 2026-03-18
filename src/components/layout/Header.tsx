@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 import { Menu, X, ChevronDown, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { personal } from "@/data/personal";
@@ -62,12 +64,29 @@ function ResumeDropdown() {
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      const hash = href.replace("/", "");
+
+      if (pathname === "/") {
+        // Already on homepage — just scroll to the section
+        e.preventDefault();
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+      // On another page — let the Link navigate to /#section
+    },
+    [pathname]
+  );
 
   return (
     <header
@@ -77,21 +96,25 @@ export function Header() {
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="/#hero" className="text-lg font-bold text-foreground tracking-tight">
+        <Link
+          href="/"
+          className="text-lg font-bold text-foreground tracking-tight"
+        >
           {personal.name}
           <span className="text-accent">.</span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="text-sm text-foreground-muted transition-colors hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -119,13 +142,16 @@ export function Header() {
         <ul className="flex flex-col gap-1 px-6 py-4">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  handleNavClick(e, link.href);
+                  setIsOpen(false);
+                }}
                 className="block rounded-lg px-4 py-2.5 text-sm text-foreground-muted transition-colors hover:bg-surface hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
 
