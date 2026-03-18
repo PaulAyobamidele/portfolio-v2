@@ -16,6 +16,7 @@ export default function Home() {
     title: post.title,
     date: post.date,
     excerpt: post.excerpt,
+    category: post.category,
     tags: post.tags,
     readingTime: post.readingTime,
   }));

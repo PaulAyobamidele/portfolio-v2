@@ -1,21 +1,12 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { BlogFrontmatter, BlogMeta } from "./blog-types";
+
+export type { BlogFrontmatter, BlogMeta, BlogCategory } from "./blog-types";
+export { BLOG_CATEGORIES } from "./blog-types";
 
 const CONTENT_DIR = path.join(process.cwd(), "src/content/blog");
-
-export type BlogFrontmatter = {
-  title: string;
-  date: string;
-  excerpt: string;
-  tags: string[];
-  published: boolean;
-};
-
-export type BlogMeta = BlogFrontmatter & {
-  slug: string;
-  readingTime: string;
-};
 
 function calculateReadingTime(content: string): string {
   const wordsPerMinute = 200;

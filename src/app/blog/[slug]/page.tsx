@@ -46,6 +46,9 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Header */}
         <header className="mb-10">
           <div className="flex items-center gap-3 text-sm text-foreground-subtle mb-4">
+            <span className="inline-flex items-center rounded-full bg-accent-muted px-2.5 py-0.5 text-xs font-medium text-accent-hover">
+              {post.frontmatter.category}
+            </span>
             <span className="flex items-center gap-1.5">
               <Calendar size={14} />
               {new Date(post.frontmatter.date).toLocaleDateString("en-US", {
