@@ -6,12 +6,12 @@ import { cn } from "@/lib/utils";
 import { personal } from "@/data/personal";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Research", href: "#research" },
-  { label: "Skills", href: "#skills" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Research", href: "/#research" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Blog", href: "/#blog" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const resumes = Object.values(personal.resumes);
@@ -77,7 +77,7 @@ export function Header() {
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#hero" className="text-lg font-bold text-foreground tracking-tight">
+        <a href="/#hero" className="text-lg font-bold text-foreground tracking-tight">
           {personal.name}
           <span className="text-accent">.</span>
         </a>
