@@ -25,7 +25,7 @@ export const projects: Project[] = [
     id: "01",
     color: "#D4500A",
     domains: ["Education", "Productivity"],
-    title: "Socratic Depth Engine",
+    title: "ARCADE",
     tagline: "A tutor that never gives answers — only better questions",
     problem:
       "AI tutors explain things. This one refuses to. It builds a live causal knowledge graph of what a learner actually understands, then finds the single minimum question that unlocks the next concept.",
