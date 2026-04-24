@@ -24,13 +24,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <ScrollReveal delay={index * 0.08}>
+    <ScrollReveal delay={index * 0.08} className="h-full">
       <div
-        className="group rounded-xl border border-border bg-background-secondary overflow-hidden transition-all duration-300 hover:border-border-hover"
+        className="group rounded-xl border border-border bg-background-secondary overflow-hidden transition-all duration-300 hover:border-border-hover h-full flex flex-col"
         style={{ borderTop: `3px solid ${project.color}` }}
       >
         {/* Header — always visible */}
-        <div className="p-6">
+        <div className="p-6 flex flex-col flex-1">
           <div className="flex items-start justify-between gap-4 mb-3">
             <div className="flex flex-wrap gap-1.5">
               {project.domains.map((d) => (
@@ -205,6 +205,7 @@ export function Projects() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.25 }}
+              className="h-full"
             >
               <ProjectCard project={project} index={i} />
             </motion.div>
